@@ -4,6 +4,10 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import del from 'del';
 import {stream as wiredep} from 'wiredep';
+import swig from 'gulp-swig';
+import data from 'gulp-data';
+import fs from 'fs';
+import path from 'path';
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -52,6 +56,23 @@ const testLintOptions = {
 gulp.task('lint', lint('app/scripts/**/*.js'));
 gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 
+function getJsonData(file) {
+  var filepath = './app/data/' + path.basename(file.path) + '.json';
+  if (fs.existsSync(filepath)) {
+    return require(filepath);
+  } else {
+    return {};
+  }
+}
+
+gulp.task('templates', () => {
+  return gulp.src('app/*.html')
+    .pipe(data(getJsonData))
+    .pipe(swig({defaults:{cache: false}}))
+    .pipe(gulp.dest('.tmp'))
+    .pipe(browserSync.stream());
+});
+
 gulp.task('html', ['styles', 'scripts'], () => {
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
@@ -91,7 +112,7 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
+gulp.task('serve', ['templates', 'styles', 'scripts', 'fonts'], () => {
   browserSync({
     notify: false,
     port: 9000,
