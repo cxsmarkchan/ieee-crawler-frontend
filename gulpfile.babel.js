@@ -8,6 +8,8 @@ import swig from 'gulp-swig';
 import data from 'gulp-data';
 import fs from 'fs';
 import path from 'path';
+import url from 'url';
+import proxy from 'proxy-middleware';
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -73,6 +75,8 @@ gulp.task('templates', () => {
     .pipe(browserSync.stream());
 });
 
+gulp.task('templates-reload', ['templates'], browserSync.reload);
+
 gulp.task('html', ['styles', 'scripts'], () => {
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
@@ -112,7 +116,9 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['templates', 'styles', 'scripts', 'fonts'], () => {
+gulp.task('serve', ['wiredep', 'templates', 'styles', 'scripts', 'fonts'], () => {
+  var proxyOptions = url.parse('http://localhost');
+  proxyOptions.route = '/api';
   browserSync({
     notify: false,
     port: 9000,
@@ -120,7 +126,8 @@ gulp.task('serve', ['templates', 'styles', 'scripts', 'fonts'], () => {
       baseDir: ['.tmp', 'app'],
       routes: {
         '/bower_components': 'bower_components'
-      }
+      },
+      middleware: [proxy(proxyOptions)]
     }
   });
 
@@ -130,6 +137,7 @@ gulp.task('serve', ['templates', 'styles', 'scripts', 'fonts'], () => {
     '.tmp/fonts/**/*'
   ]).on('change', reload);
 
+  gulp.watch('app/**/*.html', ['templates-reload']);
   gulp.watch('app/styles/**/*.scss', ['styles']);
   gulp.watch('app/scripts/**/*.js', ['scripts']);
   gulp.watch('app/fonts/**/*', ['fonts']);
