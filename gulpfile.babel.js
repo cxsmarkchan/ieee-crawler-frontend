@@ -1,9 +1,9 @@
 // generated on 2016-05-30 using generator-webapp 2.1.0
-const gulp = require('gulp');
-const gulpLoadPlugins = require('gulp-load-plugins');
-const browserSync = require('browser-sync');
-const del = require('del');
-const wiredep = require('wiredep').stream;
+import gulp from 'gulp';
+import gulpLoadPlugins from 'gulp-load-plugins';
+import browserSync from 'browser-sync';
+import del from 'del';
+import {stream as wiredep} from 'wiredep';
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -34,28 +34,23 @@ gulp.task('scripts', () => {
 });
 
 function lint(files, options) {
-  return gulp.src(files)
-    .pipe(reload({stream: true, once: true}))
-    .pipe($.eslint(options))
-    .pipe($.eslint.format())
-    .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
+  return () => {
+    return gulp.src(files)
+      .pipe(reload({stream: true, once: true}))
+      .pipe($.eslint(options))
+      .pipe($.eslint.format())
+      .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
+  };
 }
 
-gulp.task('lint', () => {
-  return lint('app/scripts/**/*.js', {
-    fix: true
-  })
-    .pipe(gulp.dest('app/scripts'));
-});
-gulp.task('lint:test', () => {
-  return lint('test/spec/**/*.js', {
-    fix: true,
-    env: {
-      mocha: true
-    }
-  })
-    .pipe(gulp.dest('test/spec/**/*.js'));
-});
+const testLintOptions = {
+  env: {
+    mocha: true
+  }
+};
+
+gulp.task('lint', lint('app/scripts/**/*.js'));
+gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 
 gulp.task('html', ['styles', 'scripts'], () => {
   return gulp.src('app/*.html')

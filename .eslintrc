@@ -1,0 +1,35 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "jquery": true,
+    "node": true,
+    "es6": true,
+    "browser": true,
+    "mocha": true
+  },
+  "rules": {
+    "eqeqeq": [2, "smart"],
+    "no-caller": 2,
+    "no-else-return": 2,
+    "no-eq-null": 2,
+    "quotes": [2, "single"],
+    "no-new-func": 2,
+    "camelcase": [2, {"properties": "always"}],
+    "brace-style": [2, "1tbs", { "allowSingleLine": true }],
+    "strict": [2, "global"],
+    "comma-spacing": [2, {"before": false, "after": true}],
+    "indent": [2, 2],
+    "key-spacing": [2, {"beforeColon": false, "afterColon": true}],
+    "no-mixed-spaces-and-tabs": [2, "smart-tabs"],
+    "space-before-blocks": [2, "always"],
+    "space-before-function-paren": [2, "never"],
+    "object-curly-spacing": [2, "always"],
+    "space-in-parens": [2, "never"],
+    "space-infix-ops": 2,
+    "dot-notation": 0
+  },
+  "globals": {
+    "Vue": true,
+    "io": true
+  }
+}
