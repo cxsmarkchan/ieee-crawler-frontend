@@ -2,8 +2,9 @@
 
 {% block title %}IEEE文献管理{% endblock %}
 
-{% block style %}
+{% block styles %}
 <!--build:css styles/index.css-->
+<link rel="stylesheet" href="styles/index.css">
 <!--endbuild-->
 {% endblock %}
 
@@ -16,7 +17,71 @@
 {% block content %}
 
 <main class="container">
-  <div id="tree"></div>
+  <div class="row full-height">
+    <div class="col-xs-4">
+      <div id="tree"></div>
+    </div>
+
+    <div class="col-xs-8 full-height">
+      <div class="brief" id="brief">
+        <ul class="list-group">
+          <a href='javascript:void(0)' class="list-group-item" v-for="item in items" @click="getDetail(item)">
+            ${ item.title }$
+            <template v-if="item.status === 0">
+              <span class="label label-default label-pill pull-right">未读</span>
+            </template>
+            <template v-if="item.status === 2">
+              <span class="label label-primary label-pill pull-right">全文</span>
+            </template>
+            <template v-if="item.status === 3">
+              <span class="label label-danger label-pill pull-right">重要</span>
+            </template>
+          </a>
+        </ul>
+      </div>
+
+      <div class="article" id="article">
+        <div class="row article-status">
+          <div class="col-xs-3">
+            <template v-if="article.status === 1">
+              <label class="label label-default label-pill">已读</label>
+            </template>
+            <template v-if="article.status === 2">
+              <span class="label label-primary label-pill">全文</span>
+            </template>
+            <template v-if="article.status === 3">
+              <span class="label label-danger label-pill">重要</span>
+            </template>
+          </div>
+          <div class="col-xs-3">
+            <button class="btn btn-default" @click="changeStatus(1)">标记为已读</button>
+          </div>
+          <div class="col-xs-3">
+            <button class="btn btn-primary" @click="changeStatus(2)">标记为全文</button>
+          </div>
+          <div class="col-xs-3">
+            <button class="btn btn-danger" @click="changeStatus(3)">标记为重要</button>
+          </div>
+        </div>
+        <div class="article-detail">
+          <ul class="list-group">
+            <li class="list-group-item">
+              Title: ${ article.title }$
+            </li>
+            <li class="list-group-item">
+              Authors: ${ article.author }$
+            </li>
+            <li class="list-group-item">
+              Keywords: ${ article.keyword }$
+            </li>
+            <li class="list-group-item">
+              Abstract: ${ article.abstract }$
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 
 {% endblock %}

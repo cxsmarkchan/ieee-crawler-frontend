@@ -1,0 +1,36 @@
+// bower:scss
+@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+.container {
+  width: 1024px;
+  height: 100vh;
+}
+
+.full-height {
+  height: 100vh;
+}
+
+#tree {
+  position: relative;
+  margin-top: 3vh;
+}
+
+.brief {
+  position: relative;
+  height: 30%;
+  margin-top: 3vh;
+  overflow-y: scroll;
+}
+
+.article {
+  position: relative;
+  height: 70%;
+  margin-top: 3vh;
+  overflow-y: scroll;
+}
+
+.article-status {
+  margin-bottom: 1em;
+}
+
