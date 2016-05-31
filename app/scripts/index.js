@@ -63,6 +63,15 @@ $(async() => {
             }
           });
         });
+        
+        $.post({
+          url: '/api/download',
+          data: {
+            arnumber: that.article.entry_number
+          }
+        }).done(() => {
+          that.article.downloaded = true;
+        })
       }
     }
   });

@@ -42,7 +42,7 @@
 
       <div class="article" id="article">
         <div class="row article-status">
-          <div class="col-xs-3">
+          <div class="col-xs-2">
             <template v-if="article.status === 1">
               <label class="label label-default label-pill">已读</label>
             </template>
@@ -53,14 +53,19 @@
               <span class="label label-danger label-pill">重要</span>
             </template>
           </div>
-          <div class="col-xs-3">
-            <button class="btn btn-default" @click="changeStatus(1)">标记为已读</button>
+          <div class="col-xs-2">
+            <template v-if="article.downloaded">
+              <a href="/api/pdf?arnumber=${article.entry_number}$" target="_blank">全文</a>
+            </template>
           </div>
-          <div class="col-xs-3">
-            <button class="btn btn-primary" @click="changeStatus(2)">标记为全文</button>
+          <div class="col-xs-2">
+            <button class="btn btn-default" @click="changeStatus(1)">标为已读</button>
           </div>
-          <div class="col-xs-3">
-            <button class="btn btn-danger" @click="changeStatus(3)">标记为重要</button>
+          <div class="col-xs-2">
+            <button class="btn btn-primary" @click="changeStatus(2)">标为全文</button>
+          </div>
+          <div class="col-xs-2">
+            <button class="btn btn-danger" @click="changeStatus(3)">标为重要</button>
           </div>
         </div>
         <div class="article-detail">
