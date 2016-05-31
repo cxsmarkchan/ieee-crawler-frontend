@@ -44,7 +44,8 @@ $(async() => {
   const articleVm = new Vue({
     el: '#article',
     data: {
-      article: {}
+      article: {},
+      editing: false
     },
     methods: {
       changeStatus(status) {
@@ -63,7 +64,7 @@ $(async() => {
             }
           });
         });
-        
+
         $.post({
           url: '/api/download',
           data: {
@@ -71,7 +72,26 @@ $(async() => {
           }
         }).done(() => {
           that.article.downloaded = true;
-        })
+        });
+      },
+
+      edit() {
+        this.editing = true;
+      },
+
+      save() {
+        const that = this;
+        const $note = $('#article-note');
+        $.post({
+          url: '/api/note',
+          data: {
+            arnumber: that.article.entry_number,
+            note: $note.val()
+          }
+        }).done(() => {
+          this.article.note = $note.val();
+          this.editing = false;
+        });
       }
     }
   });
@@ -94,6 +114,7 @@ $(async() => {
         arnumber: item.entry_number
       }
     })).data;
+    articleVm.editing = false;
   };
 
 // Obtain information of journals and issues
@@ -140,14 +161,14 @@ $(async() => {
 
 // treeview event: selected
   $tree.on('nodeSelected', async(event, data) => {
-    if (typeof data.articleStatus != 'undefined') {
+    if ('articleStatus' in data) {
       briefVm.items = (await $.get({
         url: '/api/all',
         data: {
           status: data.articleStatus
         }
       })).data;
-    } else if (typeof data.issueNumber != 'undefined') {
+    } else if ('issueNumber' in data) {
       briefVm.items = (await $.get({
         url: '/api/brief',
         data: {

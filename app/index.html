@@ -59,7 +59,11 @@
             </template>
           </div>
           <div class="col-xs-2">
-            <button class="btn btn-default" @click="changeStatus(1)">标为已读</button>
+            <button v-if="editing" class="btn btn-default" @click="save()">保存笔记</button>
+            <button v-else class="btn btn-default" @click="edit()">编辑笔记</button>
+          </div>
+          <div class="col-xs-2">
+            <button class="btn btn-success" @click="changeStatus(1)">标为已读</button>
           </div>
           <div class="col-xs-2">
             <button class="btn btn-primary" @click="changeStatus(2)">标为全文</button>
@@ -76,11 +80,18 @@
             <li class="list-group-item">
               Authors: ${ article.author }$
             </li>
-            <li class="list-group-item">
-              Keywords: ${ article.keyword }$
+            <li v-if="editing" class="list-group-item">
+              <label for="article-note">Note:</label>
+              <textarea id="article-note">${ article.note }$</textarea>
+            </li>
+            <li v-else class="list-group-item">
+              Note: ${ article.note }$
             </li>
             <li class="list-group-item">
               Abstract: ${ article.abstract }$
+            </li>
+            <li class="list-group-item">
+              Keywords: ${ article.keyword }$
             </li>
           </ul>
         </div>
