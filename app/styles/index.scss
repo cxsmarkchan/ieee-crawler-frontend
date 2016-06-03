@@ -2,23 +2,44 @@
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+body {
+  background-color: rgb(243, 250, 254);
+}
+
 .container {
   width: 1024px;
-  height: 100vh;
+  background-color: white;
+}
+
+.header {
+  background-image: linear-gradient(
+      rgb(117, 184, 221) 0px,
+      rgb(104, 173, 208) 14%,
+      rgb(76, 147, 182) 36%,
+      rgb(51, 127, 165) 57%,
+      rgb(28, 116, 160) 71%,
+      rgb(4, 109, 160) 86%,
+      rgb(0, 109, 160) 89%,
+      rgb(0, 109, 160) 100%);
+  padding-left: 20px;
+  line-height: 10vh;
+  font-size: 2em;
+  color: white;
 }
 
 .full-height {
-  height: 100vh;
+  height: 100%;
 }
 
 #tree {
   position: relative;
   margin-top: 3vh;
+  font-size: 0.75em;
 }
 
 .brief {
   position: relative;
-  height: 30%;
+  height: 30vh;
   margin-top: 3vh;
   overflow-y: scroll;
 }
@@ -27,7 +48,6 @@
   position: relative;
   height: 70%;
   margin-top: 3vh;
-  overflow-y: scroll;
 }
 
 .article-status {

@@ -17,12 +17,15 @@
 {% block content %}
 
 <main class="container">
+  <div class="row header">
+    IEEE Xplore 文献管理系统
+  </div>
   <div class="row full-height">
-    <div class="col-xs-4">
+    <div class="col-xs-3">
       <div id="tree"></div>
     </div>
 
-    <div class="col-xs-8 full-height">
+    <div class="col-xs-9 full-height">
       <div class="brief" id="brief">
         <ul class="list-group">
           <a href='javascript:void(0)' class="list-group-item" v-for="item in items" @click="getDetail(item)">
@@ -102,6 +105,9 @@
       </div>
     </div>
   </div>
+
+  {% include 'footer.html' %}
+
 </main>
 
 {% endblock %}

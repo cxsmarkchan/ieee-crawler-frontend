@@ -3,3 +3,24 @@ $icon-font-path: '../fonts/';
 * {
   font-family: Microsoft Yahei, sans-serif;
 }
+
+#footer {
+  background-image: linear-gradient(
+      rgb(36, 118, 161) 0px,
+      rgb(36, 115, 155) 1%,
+      rgb(35, 112, 151) 4%,
+      rgb(38, 103, 143) 31%,
+      rgb(36, 99, 139) 35%,
+      rgb(38, 96, 136) 46%,
+      rgb(37, 91, 132) 51%,
+      rgb(39, 93, 134) 52%,
+      rgb(38, 85, 126) 66%,
+      rgb(39, 83, 126) 75%,
+      rgb(37, 81, 121) 80%,
+      rgb(39, 80, 120) 100%);
+  color: white;
+}
+
+#footer a {
+  color: pink;
+}
