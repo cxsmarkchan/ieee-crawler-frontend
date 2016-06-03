@@ -30,6 +30,9 @@
             <template v-if="item.status === 0">
               <span class="label label-default label-pill pull-right">未读</span>
             </template>
+            <template v-if="item.status === 1">
+              <span v-if="item.downloaded" class="label label-success label-pill pull-right">全文</span>
+            </template>
             <template v-if="item.status === 2">
               <span class="label label-primary label-pill pull-right">全文</span>
             </template>
@@ -44,7 +47,8 @@
         <div class="row article-status">
           <div class="col-xs-2">
             <template v-if="article.status === 1">
-              <label class="label label-default label-pill">已读</label>
+              <label v-if="article.downloaded" class="label label-success label-pill">全文</label>
+              <label v-else class="label label-success label-pill">已读</label>
             </template>
             <template v-if="article.status === 2">
               <span class="label label-primary label-pill">全文</span>
@@ -88,7 +92,7 @@
               Note: ${ article.note }$
             </li>
             <li class="list-group-item">
-              Abstract: ${ article.abstract }$
+              Abstract: <b>${ article.abstract }$</b>
             </li>
             <li class="list-group-item">
               Keywords: ${ article.keyword }$
