@@ -28,7 +28,7 @@
     <div class="col-xs-9 full-height">
       <div class="brief" id="brief">
         <ul class="list-group">
-          <a href='javascript:void(0)' class="list-group-item" v-for="item in items" @click="getDetail(item)">
+          <a href='javascript:void(0)' class="list-group-item no-border" v-for="item in items" @click="getDetail(item)">
             ${ item.title }$
             <template v-if="item.status === 0">
               <span class="label label-default label-pill pull-right">未读</span>
@@ -81,23 +81,23 @@
         </div>
         <div class="article-detail">
           <ul class="list-group">
-            <li class="list-group-item">
+            <li class="list-group-item no-border-horizon no-border-top">
               Title: ${ article.title }$
             </li>
-            <li class="list-group-item">
+            <li class="list-group-item no-border-horizon">
               Authors: ${ article.author }$
             </li>
-            <li v-if="editing" class="list-group-item">
+            <li v-if="editing" class="list-group-item no-border-horizon">
               <label for="article-note">Note:</label>
               <textarea id="article-note">${ article.note }$</textarea>
             </li>
-            <li v-else class="list-group-item">
+            <li v-else class="list-group-item no-border-horizon">
               Note: ${ article.note }$
             </li>
-            <li class="list-group-item">
+            <li class="list-group-item no-border-horizon">
               Abstract: <b>${ article.abstract }$</b>
             </li>
-            <li class="list-group-item">
+            <li class="list-group-item no-border-horizon no-border-bottom">
               Keywords: ${ article.keyword }$
             </li>
           </ul>

@@ -159,7 +159,8 @@ $(async() => {
 
   $tree.treeview({
     data: treeData,
-    levels: 3
+    levels: 3,
+    showBorder: false
   });
 
 // treeview event: selected

@@ -35,6 +35,24 @@ body {
   position: relative;
   margin-top: 3vh;
   font-size: 0.75em;
+  border-right: rgb(235, 235, 235) solid 1px;
+}
+
+.no-border {
+  border: 0 none;
+}
+
+.no-border-horizon {
+  border-left: 0 none;
+  border-right: 0 none;
+}
+
+.no-border-top {
+  border-top: 0 none;
+}
+
+.no-border-bottom {
+  border-bottom: 0 none;
 }
 
 .brief {
