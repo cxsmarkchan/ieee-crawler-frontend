@@ -36,6 +36,7 @@ $(async() => {
   const briefVm = new Vue({
     el: '#brief',
     data: {
+      title: '',
       items: []
     },
     methods: {}
@@ -172,6 +173,7 @@ $(async() => {
           status: data.articleStatus
         }
       })).data;
+      briefVm.title = briefVm.items.length + ' articles';
     } else if ('issueNumber' in data) {
       briefVm.items = (await $.get({
         url: '/api/brief',
@@ -179,6 +181,8 @@ $(async() => {
           isnumber: data.issueNumber
         }
       })).data;
+      briefVm.title = briefVm.items.length + ' articles in ' + data.text +
+        ', ' + $tree.treeview('getNode', data.parentId).text;
     }
   });
 })

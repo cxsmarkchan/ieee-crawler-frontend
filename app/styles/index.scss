@@ -34,7 +34,7 @@ body {
 #tree {
   position: relative;
   margin-top: 3vh;
-  font-size: 0.75em;
+  font-size: 0.8em;
   border-right: rgb(235, 235, 235) solid 1px;
 }
 
@@ -57,18 +57,33 @@ body {
 
 .brief {
   position: relative;
-  height: 30vh;
   margin-top: 3vh;
+}
+
+.brief-title {
+  padding-left: 15px;
+  padding-right: 15px;
+  border-bottom: rgb(235, 235, 235) solid 1px;
+  padding-bottom: 1vh;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.brief-list {
+  height: 30vh;
   overflow-y: scroll;
+  margin-top: 1vh;
 }
 
 .article {
   position: relative;
   height: 70%;
   margin-top: 3vh;
+  border-top: rgb(235, 235, 235) solid 1px;
 }
 
 .article-status {
   margin-bottom: 1em;
+  margin-top: 3vh;
 }
 
